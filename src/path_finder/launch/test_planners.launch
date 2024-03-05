@@ -17,9 +17,9 @@
   <arg name="use_GUILD_sampling" value="false" />
   <arg name="run_rrt" value="true" />
   <arg name="run_rrt_star" value="true" />
-  <arg name="run_rrt_sharp" value="true" />
+  <arg name="run_rrt_sharp" value="false" />
   <arg name="run_brrt" value="true" />
-  <arg name="run_brrt_star" value="true" />
+  <arg name="run_brrt_star" value="false" />
 
 
   <node pkg="path_finder" type="path_finder" name="path_finder_node" output="screen">

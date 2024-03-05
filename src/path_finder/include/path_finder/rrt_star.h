@@ -69,12 +69,12 @@ namespace path_plan
       if (!map_ptr_->isStateValid(s))
       {
         ROS_ERROR("[RRT*]: Start pos collide or out of bound");
-        return false;
+        //return false;
       }
       if (!map_ptr_->isStateValid(g))
       {
         ROS_ERROR("[RRT*]: Goal pos collide or out of bound");
-        return false;
+        //return false;
       }
       /* construct start and goal nodes */
       start_node_ = nodes_pool_[1];

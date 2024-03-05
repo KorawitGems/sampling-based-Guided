@@ -5,19 +5,19 @@ set(CMAKE_BUILD_TYPE "Release")
 set(CMAKE_CXX_FLAGS "-std=c++14 ${CMAKE_CXX_FLAGS} -O3 -Wall")
 
 find_package(catkin REQUIRED COMPONENTS
-  roscpp
-  rospy
-  std_msgs
-  visualization_msgs
+    roscpp
+    rospy
+    std_msgs
+    visualization_msgs
 )
 
 find_package(Eigen3 REQUIRED)
 find_package(PCL 1.7 REQUIRED)
 
 catkin_package(
- INCLUDE_DIRS include
- LIBRARIES occ_grid
- CATKIN_DEPENDS roscpp std_msgs 
+    INCLUDE_DIRS include
+    LIBRARIES occ_grid
+    CATKIN_DEPENDS roscpp std_msgs 
 #  DEPENDS system_lib
 ) 
 
@@ -38,4 +38,5 @@ add_library( occ_grid
 target_link_libraries( occ_grid
     ${catkin_LIBRARIES}
     ${PCL_LIBRARIES}
+    ${EIGEN3_INCLUDE_DIRS}
 )  
