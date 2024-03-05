@@ -1,3 +1,17 @@
+# Modified
+
+Implement an inflated occupancy grid's radius.
+
+Implement state validity by adding virtual states around current state to extend more state checking in planning.
+
+Implement dynamics to delete occupancy grid to update the new current grid if the environment changes.
+
+<p align="center">
+  <img src="image/inflated_grid.png" width = "640" height = "360"/>
+</p>
+
+---
+
 # C++ implementation and visualization of some sampling-based path planners
 
 ## Build & Run
