@@ -1,0 +1,106 @@
+<?xml version="1.0"?>
+<launch>
+  <arg name="global_cloud_topic" default="/rtabmap/cloud_map" />
+  <arg name="command_goal_topic" default="/command/goal" />
+  <arg name="current_pose_topic" default="/current_pose" />
+  <arg name="output_cloud_topic" default="/occ_map/glb_map" />
+
+  <arg name="plan/time_up" default="false"/>
+  <arg name="collision_check/collision_radius" default="2.0" />
+  <arg name="collision_check/radius_step" default="4" />
+
+  <arg name="occupancy_grid/dynamics/range_x" default="5.0" />
+  <arg name="occupancy_grid/dynamics/range_y" default="5.0" />
+  <arg name="occupancy_grid/dynamics/range_z" default="5.0" />
+  <arg name="occupancy_grid/dynamics/range_offset" default="-0.05" />
+  <arg name="occupancy_grid/cloud/publish" default="true" />
+
+  <arg name="inflation/radius" default="0.5"/>
+  <arg name="inflation/radius_step" default="0.2"/>
+  <arg name="inflation/boundary" default="5.0"/>
+  
+  <arg name="map_size_x" default="50.0" />
+  <arg name="map_size_y" default="50.0" />
+  <arg name="map_size_z" default="8.0" />
+  <arg name="origin_x" default="-25.0" />
+  <arg name="origin_y" default="-25.0" />
+  <arg name="origin_z" default="-1.0" />
+  <arg name="resolution" default="0.5" />
+
+  <arg name="steer_length" default="2.0" />
+  <arg name="search_radius" default="6.0" />
+  <arg name="search_time" default="0.1" />
+  <arg name="max_tree_node_nums" default="1000" />
+  <arg name="use_informed_sampling" default="true" />
+  <arg name="use_GUILD_sampling" default="false" />
+  <arg name="run_rrt" default="false" />
+  <arg name="run_rrt_star" default="false" />
+  <arg name="run_rrt_sharp" default="false" />
+  <arg name="run_brrt" default="false" />
+  <arg name="run_brrt_star" default="true" />
+
+
+  <node pkg="path_finder" type="sampling_global_planner_node" name="sampling_global_planner" >
+    <remap from="/global_cloud" to="$(arg global_cloud_topic)"/>
+    <remap from="/command/goal" to="$(arg command_goal_topic)"/>
+    <remap from="/current_pose" to="$(arg current_pose_topic)"/>
+    <remap from="/occ_map/glb_map" to="$(arg output_cloud_topic)"/>
+
+    <param name="plan/time_up" value="$(arg plan/time_up)" type="bool" />
+    <param name="collision_check/collision_radius" value="$(arg collision_check/collision_radius)" type="double"/>
+    <param name="collision_check/radius_step" value="$(arg collision_check/radius_step)" type="double"/>
+    <param name="occupancy_grid/dynamics/range_x" value="$(arg occupancy_grid/dynamics/range_x)" type="double"/>
+    <param name="occupancy_grid/dynamics/range_y" value="$(arg occupancy_grid/dynamics/range_y)" type="double"/>
+    <param name="occupancy_grid/dynamics/range_z" value="$(arg occupancy_grid/dynamics/range_z)" type="double"/>
+    <param name="occupancy_grid/dynamics/range_offset" value="$(arg occupancy_grid/dynamics/range_offset)" type="double"/>
+    <param name="occupancy_grid/cloud/publish" value="$(arg occupancy_grid/cloud/publish)" type="bool" />
+    <param name="inflation/radius" type="double" value="$(arg inflation/radius)"/>
+    <param name="inflation/radius_step" type="double" value="$(arg inflation/radius_step)"/>
+    <param name="inflation/boundary" type="double" value="$(arg inflation/boundary)"/>
+
+    <param name="run_rrt" value="$(arg run_rrt)" type="bool"/>
+    <param name="run_rrt_star" value="$(arg run_rrt_star)" type="bool"/>
+    <param name="run_rrt_sharp" value="$(arg run_rrt_sharp)" type="bool"/>
+    <param name="run_brrt" value="$(arg run_brrt)" type="bool"/>
+    <param name="run_brrt_star" value="$(arg run_brrt_star)" type="bool"/>
+
+    <param name="occ_map/origin_x" value="$(arg origin_x)" type="double"/>
+    <param name="occ_map/origin_y" value="$(arg origin_y)" type="double"/>
+    <param name="occ_map/origin_z" value="$(arg origin_z)" type="double"/>
+    <param name="occ_map/map_size_x" value="$(arg map_size_x)" type="double"/>
+    <param name="occ_map/map_size_y" value="$(arg map_size_y)" type="double"/>
+    <param name="occ_map/map_size_z" value="$(arg map_size_z)" type="double"/>
+    <param name="occ_map/resolution" value="$(arg resolution)" type="double"/>
+
+    <param name="RRT/steer_length" value="$(arg steer_length)" type="double"/>
+    <param name="RRT/search_radius" value="$(arg search_radius)" type="double"/>
+    <param name="RRT/search_time" value="$(arg search_time)" type="double"/>
+    <param name="RRT/max_tree_node_nums" value="$(arg max_tree_node_nums)" type="int"/>
+
+    <param name="RRT_Star/steer_length" value="$(arg steer_length)" type="double"/>
+    <param name="RRT_Star/search_radius" value="$(arg search_radius)" type="double"/>
+    <param name="RRT_Star/search_time" value="$(arg search_time)" type="double"/>
+    <param name="RRT_Star/max_tree_node_nums" value="$(arg max_tree_node_nums)" type="int"/>
+    <param name="RRT_Star/use_informed_sampling" value="$(arg use_informed_sampling)" type="bool"/>
+    <param name="RRT_Star/use_GUILD_sampling" value="$(arg use_GUILD_sampling)" type="bool"/>
+
+    <param name="RRT_Sharp/steer_length" value="$(arg steer_length)" type="double"/>
+    <param name="RRT_Sharp/search_radius" value="$(arg search_radius)" type="double"/>
+    <param name="RRT_Sharp/search_time" value="$(arg search_time)" type="double"/>
+    <param name="RRT_Sharp/max_tree_node_nums" value="$(arg max_tree_node_nums)" type="int"/>
+    <param name="RRT_Sharp/use_informed_sampling" value="$(arg use_informed_sampling)" type="bool"/>
+    <param name="RRT_Sharp/use_GUILD_sampling" value="$(arg use_GUILD_sampling)" type="bool"/>
+
+    <param name="BRRT/steer_length" value="$(arg steer_length)" type="double"/>
+    <param name="BRRT/search_time" value="$(arg search_time)" type="double"/>
+    <param name="BRRT/max_tree_node_nums" value="$(arg max_tree_node_nums)" type="int"/>
+
+    <param name="BRRT_Star/steer_length" value="$(arg steer_length)" type="double"/>
+    <param name="BRRT_Star/search_radius" value="$(arg search_radius)" type="double"/>
+    <param name="BRRT_Star/search_time" value="$(arg search_time)" type="double"/>
+    <param name="BRRT_Star/max_tree_node_nums" value="$(arg max_tree_node_nums)" type="int"/>
+    <param name="BRRT_Star/use_informed_sampling" value="$(arg use_informed_sampling)" type="bool"/>
+
+  </node>
+
+</launch>

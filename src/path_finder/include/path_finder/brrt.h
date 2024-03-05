@@ -64,7 +64,7 @@ namespace path_plan
       if (!map_ptr_->isStateValid(s))
       {
         ROS_ERROR("[BRRT]: Start pos collide or out of bound");
-        return false;
+        //return false;
       }
       if (!map_ptr_->isStateValid(g))
       {

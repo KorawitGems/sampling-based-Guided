@@ -11,15 +11,19 @@ find_package(catkin REQUIRED COMPONENTS
   std_msgs
   occ_grid
   self_msgs_and_srvs
+  geometry_msgs
+  tf2
+  tf2_ros
+  pcl_ros
 )
 
 find_package(Eigen3 REQUIRED)
-find_package(PCL 1.7 REQUIRED)
+find_package(PCL REQUIRED)
 
 catkin_package(
   INCLUDE_DIRS include
   LIBRARIES path_finder
-  CATKIN_DEPENDS occ_grid
+  CATKIN_DEPENDS occ_grid geometry_msgs tf2 tf2_ros pcl_ros
 #  DEPENDS system_lib
 )
 
@@ -34,8 +38,25 @@ add_executable(${PROJECT_NAME}
   src/test_planner.cpp
   src/kdtree.c
 )
-
 target_link_libraries(${PROJECT_NAME}
+  ${catkin_LIBRARIES}
+  ${PCL_LIBRARIES}
+)
+
+add_executable(sampling_global_planner_node
+  src/sampling_global_planner_node.cpp
+  src/kdtree.c
+)
+target_link_libraries(sampling_global_planner_node
+  ${catkin_LIBRARIES}
+  ${PCL_LIBRARIES}
+)
+
+add_executable(sampling_local_planner_node
+  src/sampling_local_planner_node.cpp
+  src/kdtree.c
+)
+target_link_libraries(sampling_local_planner_node
   ${catkin_LIBRARIES}
   ${PCL_LIBRARIES}
 )

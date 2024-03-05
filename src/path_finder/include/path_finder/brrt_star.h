@@ -38,13 +38,13 @@ namespace path_plan
   {
   public:
     BRRTStar(){};
-    BRRTStar(const ros::NodeHandle &nh, const env::OccMap::Ptr &mapPtr) : nh_(nh), map_ptr_(mapPtr)
+    BRRTStar(const ros::NodeHandle &pnh, const env::OccMap::Ptr &mapPtr) : pnh_(pnh), map_ptr_(mapPtr)
     {
-      nh_.param("BRRT_Star/steer_length", steer_length_, 0.0);
-      nh_.param("BRRT_Star/search_radius", search_radius_, 0.0);
-      nh_.param("BRRT_Star/search_time", search_time_, 0.0);
-      nh_.param("BRRT_Star/max_tree_node_nums", max_tree_node_nums_, 0);
-      nh_.param("BRRT_Star/use_informed_sampling", use_informed_sampling_, false);
+      pnh_.param("BRRT_Star/steer_length", steer_length_, 0.0);
+      pnh_.param("BRRT_Star/search_radius", search_radius_, 0.0);
+      pnh_.param("BRRT_Star/search_time", search_time_, 0.0);
+      pnh_.param("BRRT_Star/max_tree_node_nums", max_tree_node_nums_, 0);
+      pnh_.param("BRRT_Star/use_informed_sampling", use_informed_sampling_, false);
       ROS_WARN_STREAM("[BRRT*] param: steer_length: " << steer_length_);
       ROS_WARN_STREAM("[BRRT*] param: search_radius: " << search_radius_);
       ROS_WARN_STREAM("[BRRT*] param: search_time: " << search_time_);
@@ -68,7 +68,7 @@ namespace path_plan
       if (!map_ptr_->isStateValid(s))
       {
         ROS_ERROR("[BRRT*]: Start pos collide or out of bound");
-        return false;
+        //return false;
       }
       if (!map_ptr_->isStateValid(g))
       {
@@ -118,7 +118,7 @@ namespace path_plan
 
   private:
     // nodehandle params
-    ros::NodeHandle nh_;
+    ros::NodeHandle pnh_;
 
     BiasSampler sampler_;
     // for informed sampling

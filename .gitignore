@@ -2,3 +2,6 @@ devel/
 build/
 .catkin_workspace
 .vscode/
+
+# ignore ALL files in ANY directory named backup
+backup/
