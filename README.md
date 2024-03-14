@@ -1,10 +1,10 @@
-# Modified
+# Modification
 
-Implement an inflated occupancy grid's radius.
+Implemented an inflated occupancy grid's radius.
 
-Implement state validity by adding virtual states around current state to extend more state checking in planning.
+Implemented virtual state checking by adding virtual states around the current state to extend the state checking capability in planning
 
-Implement dynamics to delete occupancy grid to update the new current grid if the environment changes.
+Implemented dynamics occupancy grid to update the new occupancy grid in the dynamics environment.
 
 <p align="center">
   <img src="image/inflated_grid.png" width = "640" height = "360"/>
