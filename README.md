@@ -1,9 +1,6 @@
 # Modification
 
-Implemented an inflated occupancy grid's radius.
-
-Implemented virtual state checking by adding virtual states around the current state to extend the state checking capability in planning
-
+Implemented an inflated occupancy grid's radius to extend the state checking capability in path planning.
 Implemented dynamics occupancy grid to update the new occupancy grid in the dynamics environment.
 
 <p align="center">
