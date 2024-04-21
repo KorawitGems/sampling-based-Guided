@@ -63,7 +63,7 @@ namespace env
 
     bool isStateValid(const Eigen::Vector3d &pos)
     {
-      // modified
+      // modified part
       // Inflated positions in the positive and negative directions for x, y, and z
       for (int i = collision_radius_index_; i >= -collision_radius_index_; i -= collision_radius_step_index_)
       {
@@ -204,17 +204,17 @@ namespace env
   inline void OccMap::indexToPos(const Eigen::Vector3i &id, Eigen::Vector3d &pos)
   {
     pos = origin_;
-    pos(0) += (id(0)) * resolution_;
-    pos(1) += (id(1)) * resolution_;
-    pos(2) += (id(2)) * resolution_;
+    pos(0) += (id(0) + 0.5) * resolution_;
+    pos(1) += (id(1) + 0.5) * resolution_;
+    pos(2) += (id(2) + 0.5) * resolution_;
   }
 
   inline void OccMap::indexToPos(const int &x, const int &y, const int &z, Eigen::Vector3d &pos)
   {
     pos = origin_;
-    pos(0) += (x) * resolution_;
-    pos(1) += (y) * resolution_;
-    pos(2) += (z) * resolution_;
+    pos(0) += (x + 0.5) * resolution_;
+    pos(1) += (y + 0.5) * resolution_;
+    pos(2) += (z + 0.5) * resolution_;
   }
 
 } // namespace env

@@ -88,27 +88,26 @@ namespace env
     }
 
     // Get the current position
-    Eigen::Vector3d current_position_vector = Eigen::Vector3d(current_pose_.pose.position.x, current_pose_.pose.position.y, current_pose_.pose.position.z);
-
-    // Reset occupancy buffer within the specified range around the current position
-    Eigen::Vector3d reset_min_range = current_position_vector - Eigen::Vector3d(range_x_ + range_offset_, range_y_ + range_offset_, range_z_ + range_offset_);
-    Eigen::Vector3d reset_max_range = current_position_vector + Eigen::Vector3d(range_x_ + range_offset_, range_y_ + range_offset_, range_z_ + range_offset_);
-    Eigen::Vector3i index_min_range;
-    posToIndex(reset_min_range, index_min_range);
-    Eigen::Vector3i index_max_range;
-    posToIndex(reset_max_range, index_max_range);
-    // clear occupancy grid in range with false before apply obstacle point cloud to grid
-    for (int x = floor(index_max_range(0)/2); x <= index_max_range(0); x += 1) // use only +x/2 to +x
-    {
-      for (int y = index_min_range(1); y <= index_max_range(0); y += 1) 
-      {
-        for (int z = index_min_range(2); z <= index_max_range(0); z += 1) 
-        {
-          occupancy_buffer_[idxToAddress(x, y, z)] = false;
-          //inflated_occupancy_buffer_(clear_index(0),clear_index(1),clear_index(2)) = false;
-        }
-      }
-    }
+    // Eigen::Vector3d current_position_vector = Eigen::Vector3d(current_pose_.pose.position.x, current_pose_.pose.position.y, current_pose_.pose.position.z);
+    // // Reset occupancy buffer within the specified range around the current position
+    // Eigen::Vector3d reset_min_range = current_position_vector - Eigen::Vector3d(range_x_ + range_offset_, range_y_ + range_offset_, range_z_ + range_offset_);
+    // Eigen::Vector3d reset_max_range = current_position_vector + Eigen::Vector3d(range_x_ + range_offset_, range_y_ + range_offset_, range_z_ + range_offset_);
+    // Eigen::Vector3i index_min_range;
+    // posToIndex(reset_min_range, index_min_range);
+    // Eigen::Vector3i index_max_range;
+    // posToIndex(reset_max_range, index_max_range);
+    // // clear occupancy grid in range with false before apply obstacle point cloud to grid
+    // for (int x = floor(index_max_range(0)/2); x <= index_max_range(0); x += 1) // use only +x/2 to +x
+    // {
+    //   for (int y = index_min_range(1); y <= index_max_range(0); y += 1) 
+    //   {
+    //     for (int z = index_min_range(2); z <= index_max_range(0); z += 1) 
+    //     {
+    //       occupancy_buffer_[idxToAddress(x, y, z)] = false;
+    //       //inflated_occupancy_buffer_(clear_index(0),clear_index(1),clear_index(2)) = false;
+    //     }
+    //   }
+    // }
 
     //apply obstacle point cloud to occupancy grid buffer
     for (const auto& point : global_cloud_ptr_->points)
