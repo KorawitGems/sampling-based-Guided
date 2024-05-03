@@ -18,16 +18,16 @@ CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING
 IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
 OF SUCH DAMAGE.
 */
-#include "self_msgs_and_srvs/GlbObsRcv.h"
-#include "occ_grid/occ_map.h"
-#include "path_finder/rrt_sharp.h"
-#include "path_finder/rrt_star.h"
-#include "path_finder/rrt.h"
-#include "path_finder/brrt.h"
-#include "path_finder/brrt_star.h"
-#include "visualization/visualization.hpp"
-
 #include <ros/ros.h>
+//#include <self_msgs_and_srvs/GlbObsRcv.h>
+#include <occ_grid/occ_map.h>
+#include <path_finder/rrt_sharp.h>
+#include <path_finder/rrt_star.h>
+#include <path_finder/rrt.h>
+#include <path_finder/brrt.h>
+#include <path_finder/brrt_star.h>
+#include <visualization/visualization.hpp>
+
 #include <geometry_msgs/PoseStamped.h>
 
 class TesterPathFinder
@@ -88,8 +88,8 @@ public:
         vis_ptr_->registe<sensor_msgs::PointCloud2>("brrt_star_final_wpts");
 
         goal_sub_ = nh_.subscribe("/goal", 1, &TesterPathFinder::goalCallback, this);
-        execution_timer_ = nh_.createTimer(ros::Duration(1), &TesterPathFinder::executionCallback, this);
-        rcv_glb_obs_client_ = nh_.serviceClient<self_msgs_and_srvs::GlbObsRcv>("/pub_glb_obs");
+        //execution_timer_ = nh_.createTimer(ros::Duration(1), &TesterPathFinder::executionCallback, this);
+        //rcv_glb_obs_client_ = nh_.serviceClient<self_msgs_and_srvs::GlbObsRcv>("/pub_glb_obs");
 
         start_.setZero();
 
@@ -193,20 +193,20 @@ public:
         start_ = goal_;
     }
 
-    void executionCallback(const ros::TimerEvent &event)
-    {
-        if (!env_ptr_->mapValid())
-        {
-            ROS_INFO("no map rcved yet.");
-            self_msgs_and_srvs::GlbObsRcv srv;
-            if (!rcv_glb_obs_client_.call(srv))
-                ROS_WARN("Failed to call service /pub_glb_obs");
-        }
-        else
-        {
-            execution_timer_.stop();
-        }
-    };
+    // void executionCallback(const ros::TimerEvent &event)
+    // {
+    //     if (!env_ptr_->mapValid())
+    //     {
+    //         ROS_INFO("no map rcved yet.");
+    //         self_msgs_and_srvs::GlbObsRcv srv;
+    //         if (!rcv_glb_obs_client_.call(srv))
+    //             ROS_WARN("Failed to call service /pub_glb_obs");
+    //     }
+    //     else
+    //     {
+    //         execution_timer_.stop();
+    //     }
+    // }
 };
 
 int main(int argc, char **argv)
